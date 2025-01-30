@@ -99,4 +99,27 @@ modeToggleButton.addEventListener('click', toggleMode);
 timeLeft = WORK_TIME;
 updateDisplay();
 
-modeToggleButton.classList.add('work-mode'); // Initial state 
+modeToggleButton.classList.add('work-mode'); // Initial state
+
+// Theme toggle functionality
+const themeToggle = document.querySelector('.theme-toggle');
+const body = document.body;
+
+// Set default to light mode if no preference is saved
+const savedTheme = localStorage.getItem('theme') || 'light';
+if (savedTheme === 'light') {
+    body.classList.add('light-theme');
+    themeToggle.textContent = 'Dark Mode';
+} else {
+    themeToggle.textContent = 'Light Mode';
+}
+
+// Theme toggle event listener
+themeToggle.addEventListener('click', () => {
+    body.classList.toggle('light-theme');
+    
+    // Save theme preference and update button text
+    const isLight = body.classList.contains('light-theme');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    themeToggle.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+}); 
